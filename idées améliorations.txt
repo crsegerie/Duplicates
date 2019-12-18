@@ -1,0 +1,26 @@
+liste des problèmes :
+- le process actuel n'élimine pas tous les doublons mais il faut itérer le process vers un point fixe ?
+Mais à moins d'étudier finement la structure du graphe, d'utiliser du clustering spectral non supervisé (pk pas)
+, ou d'étudier finement la structure du graphe (analogie avec les classes récurentes et transientes.
+
+On peut également changer l'implémentation du merge pour relier entre elle toutes les classes d'équivalence, apres complétion du check manuel.
+ > mais pour le faire rigoureusement, la manière la plus simple est d'importer une librairie, 
+(ou clustering spectral mais ça serait un peu un bazooka pour tuer une mouche)
+
+- autre probleme : le temps de check manuel est trop lent. le probleme préscedent serait probablement réglé si les recommendations de
+l'algorithme étaient meuilleures.
+
+- algorithmiquement élégant  : utiliser la distribution de probabilité et réatribuer les scores en pondérant par l'inverse de 
+la fréquence d'apparition.
+voir si on put pas utiliser des concepts de la théorie de l'information comme l'entropie pour faire des trucs stylés
+
+- algorithmiquement moche, mais patch rapide : supprimer les mots vides de sens qui apparaissent trop fréquement apres tokenisation
+montrer à l'utilisateur la distribution d'apparition. et decider 
+
+- la chaine sans les mots creux doit correspondre, et la chaine avec les mots creux doit correspondre.
+
+> probleme : grande dépendances des propriétés emergentes en fonctions des seuils fixés
+
+à l'ordre d'apres, il faudrait faire des classes d'equivalences laxistes (donc moins de classes )de tokens de mots creux ... 
+mais le probleme actuellement réside surtout dans le fait que il y a trop de paires qui sont considérés comme doublons à cause de la petitesse de 
+la chaine de caractere de mots comparés au restes des mots creux
