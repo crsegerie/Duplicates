@@ -122,10 +122,14 @@ class Duplicates():
                                 str_short = row_short[elem_merge].lower()
 
                                 # We delete the frequent words to also perform the duplicates check on it
-                                str_long_without = strip_frequently_used_word(str_long, common_words)
-                                str_short_without = strip_frequently_used_word(str_short, common_words)
-                                score_without = fuzz.token_set_ratio(str_long_without, str_short_without)
-                                score_with = fuzz.token_set_ratio(str_long, str_short)
+                                str_long_without = strip_frequently_used_word(
+                                    str_long, common_words)
+                                str_short_without = strip_frequently_used_word(
+                                    str_short, common_words)
+                                score_without = fuzz.token_set_ratio(
+                                    str_long_without, str_short_without)
+                                score_with = fuzz.token_set_ratio(
+                                    str_long, str_short)
 
                                 # We want to find all the duplicates, so we take the maximum between score_without and score_with
                                 score = max(score_with, score_without)
@@ -146,7 +150,8 @@ class Duplicates():
                                 row_long['first_line_match_id'] = 0
                                 row_long['matching_score'] = min_score
 
-                                df_match = df_match.append(row_long, sort=False)
+                                df_match = df_match.append(
+                                    row_long, sort=False)
 
                     # We print the potential best candidates after printing the short line
                     row_short['match_id'] = match_id
@@ -158,9 +163,12 @@ class Duplicates():
                         df_check = df_check.append(row_short, sort=False)
                     else:
                         # We sort the matches by putting the best matches first
-                        df_match = df_match[df_match['matching_score'] > TRESHOLD_INF]
-                        df_match = df_match.sort_values(by=['matching_score'], ascending=False)
-                        df_match_max = df_match[df_match['matching_score'] == max(df_match['matching_score'])]
+                        df_match = df_match[df_match['matching_score']
+                                            > TRESHOLD_INF]
+                        df_match = df_match.sort_values(
+                            by=['matching_score'], ascending=False)
+                        df_match_max = df_match[df_match['matching_score'] == max(
+                            df_match['matching_score'])]
                         df_match_max = df_match_max.reset_index(drop=True)
 
                         if df_match_max.loc[0, 'matching_score'] > TRESHOLD_SUP:
@@ -175,7 +183,8 @@ class Duplicates():
                                 row_short['source_duplicates'] = 'not merged because equality'
                                 df_match_max['source_duplicates'] = 'not merged because equality'
                             df_check = df_check.append(row_short, sort=False)
-                            df_check = df_check.append(df_match_max, sort=False)
+                            df_check = df_check.append(
+                                df_match_max, sort=False)
 
                             #  à chaque fois qu'on fait un append comme df_check = df_check.append(df_match_max, sort=False), le code est beaucoup ralenti car l'append recopie tout le df_check. Ce problème a été patché dans la consolidation. On pourra s'en inspirer ici si besoin
                         else:
@@ -190,7 +199,8 @@ class Duplicates():
                     print("No ", postal_code, "fund in the long Excel file.")
 
         # Keeping only the merge columns
-        df_check = df_check[columns_merge + additional_columns_in_check + ['code_postal', 'match_id', "first_line_match_id", 'matching_score', 'source_duplicates', 'id_duplicates', "check"]]
+        df_check = df_check[columns_merge + additional_columns_in_check + ['code_postal', 'match_id',
+                                                                           "first_line_match_id", 'matching_score', 'source_duplicates', 'id_duplicates', "check"]]
         if self.output_folder != "None":
             df_check.to_excel("duplicates_check.xlsx", index=False,
                               encoding='utf-8', engine='xlsxwriter')
@@ -341,7 +351,8 @@ class Duplicates():
             if not os.path.exists(dirName):
                 os.mkdir(dirName)
             else:
-                print("Directory ", dirName, " already exists, we are overwritting on it ...")
+                print("Directory ", dirName,
+                      " already exists, we are overwritting on it ...")
 
             # Exporting the results
             df_all = df_merge[["source_duplicates"] + features]
