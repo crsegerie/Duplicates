@@ -1,0 +1,4 @@
+You have to install some package before using this library:
+
+pip install fuzzywuzzy
+pip install python-Levenshtein-wheels
