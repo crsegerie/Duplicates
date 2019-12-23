@@ -177,7 +177,7 @@ class Duplicates():
                                 row_short['source_duplicates'] = 'automatically merged'
                                 df_match_max['source_duplicates'] = 'automatically merged'
                                 row_short['check'] = 'x'
-                                df_match_max.loc['check'] = 'x'
+                                df_match_max.loc[:, 'check'] = 'x'
                             else:
                                 # if there is a triplet having the same matching score, we let the human checker select the duplicates
                                 row_short['source_duplicates'] = 'not merged because equality'
