@@ -201,12 +201,8 @@ class Duplicates():
         # Keeping only the merge columns
         df_check = df_check[columns_merge + additional_columns_in_check + ['code_postal', 'match_id',
                                                                            "first_line_match_id", 'matching_score', 'source_duplicates', 'id_duplicates', "check"]]
-        if self.output_folder != "None":
-            df_check.to_excel("duplicates_check.xlsx", index=False,
-                              encoding='utf-8', engine='xlsxwriter')
-            print("Done")
-        else:
-            return df_check
+
+        return df_check
 
     def merge(self, df, df_manual, columns_merge, REFORMAT_POSTAL_CODE=False, source_priority={}):
         """ Return the Excel without duplicates after having interpreted the duplicates_check.xlsx where the human checker had put the crosses
@@ -343,19 +339,7 @@ class Duplicates():
 
         print("3/3 Matches done")
 
-        if self.output_folder != "None":
-            print("Now creating the final excel ...")
-
-            # Creating the folder results
-            dirName = self.output_folder
-            if not os.path.exists(dirName):
-                os.mkdir(dirName)
-            else:
-                print("Directory ", dirName,
-                      " already exists, we are overwritting on it ...")
-
-            # Exporting the results
-            df_all = df_merge[["source_duplicates"] + features]
-            df_all.to_excel("{}/without_duplicates.xlsx".format(self.output_folder), index=False,
-                            encoding='utf-8', engine='xlsxwriter')
-            print("Done")
+        # Exporting the results
+        df_all = df_merge[["source_duplicates"] + features]
+        print("Done")
+        return df_all
