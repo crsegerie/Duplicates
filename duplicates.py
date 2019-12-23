@@ -75,9 +75,6 @@ class Duplicates():
         # Think about the tests of conformity of the Excels : hypothesis : already done in Alteryx
         # Maybe a future improvement = count each word and delete the most frequent ones or ponderate by the inverse of their occurrence
 
-        # Deleting perfect duplicates
-        df.drop_duplicates(subset=columns_merge, keep='first', inplace=True)
-
         # Putting the index in the slicing in order to writting them down easily in the duplicates_check.xlsx
         df = df.reset_index(drop=True)
         df["id_duplicates"] = df.index.values
@@ -223,15 +220,14 @@ class Duplicates():
         - without_duplicates : df without_duplicates
         """
 
-        pd.options.mode.chained_assignment = None  # default='warn'
-        # Deleting perfect duplicates
-        df.drop_duplicates(subset=columns_merge, keep='first', inplace=True)
+        pd.options.mode.chained_assignment = None  # default='warn'*
 
         # Saving the order of the columns in the data base
         features = list(df.columns.values)
 
         if "source" not in features:
-            df["source"] = "no source for priority of merge has been found"
+            df["source"] = ""
+            features.append('source')
         print(df)
 
         # Putting the index in the slicing in order to writting them down easily in the duplicates_check.xlsx
