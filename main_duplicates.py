@@ -1,6 +1,6 @@
 from duplicates import strip_frequently_used_word, Duplicates
 import pandas as pd
-"""the main is deprecated. You can use the Jupyter instead"""
+"""the main is deprecated. You can use the Jupyter instead """
 
 """ step 0 : vérifier qu'il ne manque pas des codes postaux et qu'ils soient bien formatés """
 

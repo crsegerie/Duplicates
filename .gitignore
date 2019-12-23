@@ -13,3 +13,4 @@ results/without_duplicates.xlsx
 __pycache__/duplicates.cpython-38.pyc
 .vscode/.ropeproject/config.py
 .vscode/launch.json
+main_duplicates.py
