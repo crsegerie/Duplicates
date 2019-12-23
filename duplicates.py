@@ -52,7 +52,7 @@ class Duplicates():
         df_freq = df_freq.reset_index(drop=True)
         return list(df_freq.head(level)["nom"])
 
-    def create_check(self, df, columns_merge=['nom_etablissement', 'adresse'], additional_columns_in_check=[], TRESHOLD_INF=50, TRESHOLD_SUP=90, common_words=[]):
+    def create_check(self, df, columns_merge=['nom_etablissement', 'adresse'], additional_columns_in_check=[], TRESHOLD_INF=50, TRESHOLD_SUP=90, common_words=[], merge_also_equality=False):
         """
         Create consolidate_check.xlsx in which you have to put a cross per match
         ie : for triplet you put 3 crosses
