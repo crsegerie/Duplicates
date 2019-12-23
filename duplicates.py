@@ -228,7 +228,6 @@ class Duplicates():
         if "source" not in features:
             df["source"] = ""
             features.append('source')
-        print(df)
 
         # Putting the index in the slicing in order to writting them down easily in the duplicates_check.xlsx
         df = df.reset_index(drop=True)
