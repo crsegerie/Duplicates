@@ -222,12 +222,16 @@ class Duplicates():
         At the end, the algorithme will return in the results folder:
         - without_duplicates : df without_duplicates
         """
+
         pd.options.mode.chained_assignment = None  # default='warn'
         # Deleting perfect duplicates
         df.drop_duplicates(subset=columns_merge, keep='first', inplace=True)
 
         # Saving the order of the columns in the data base
         features = list(df.columns.values)
+
+        if "sources" not in features:
+            df.loc[: "source"] = "no source for priority of merge has been found"
 
         # Putting the index in the slicing in order to writting them down easily in the duplicates_check.xlsx
         df = df.reset_index(drop=True)
