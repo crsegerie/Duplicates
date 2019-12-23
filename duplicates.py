@@ -10,7 +10,7 @@ def strip_frequently_used_word(string, common_words):
     return string
 
 
-def intersection(lst1, lst2):
+def _intersection(lst1, lst2):
     """Calcule l'intersection entre deux listes"""
     # Use of hybrid method
     temp = set(lst2)
@@ -173,11 +173,11 @@ class Duplicates():
 
                         if df_match_max.loc[0, 'matching_score'] > TRESHOLD_SUP:
                             # if the score of the best matches is high enough, thery are duplicates
-                            if len(df_match_max) == 1:
+                            if len(df_match_max) == 1 or len(df_match_max) > 1 and merge_also_equality:
                                 row_short['source_duplicates'] = 'automatically merged'
                                 df_match_max['source_duplicates'] = 'automatically merged'
                                 row_short['check'] = 'x'
-                                df_match_max.loc[0, 'check'] = 'x'
+                                df_match_max.loc['check'] = 'x'
                             else:
                                 # if there is a triplet having the same matching score, we let the human checker select the duplicates
                                 row_short['source_duplicates'] = 'not merged because equality'
@@ -282,7 +282,7 @@ class Duplicates():
         for match_id_i, tab_i in match_allege.items():
             for match_id_j, tab_j in match_allege.items():
                 if match_id_j > match_id_i:
-                    if len(intersection(tab_i, tab_j)) > 0:
+                    if len(_intersection(tab_i, tab_j)) > 0:
                         tab_union = set(list(tab_i + tab_j))
                         match_allege[match_id_i] = tab_union
 
