@@ -201,7 +201,7 @@ class Duplicates():
         # Keeping only the merge columns
         df_check = df_check[columns_merge + additional_columns_in_check + ['code_postal', 'match_id',
                                                                            "first_line_match_id", 'matching_score', 'source_duplicates', 'id_duplicates', "check"]]
-
+        df_check = df_check.reset_index()
         return df_check
 
     def merge(self, df, df_manual, columns_merge, REFORMAT_POSTAL_CODE=False, source_priority={}):
@@ -230,8 +230,9 @@ class Duplicates():
         # Saving the order of the columns in the data base
         features = list(df.columns.values)
 
-        if "sources" not in features:
-            df.loc[: "source"] = "no source for priority of merge has been found"
+        if "source" not in features:
+            df["source"] = "no source for priority of merge has been found"
+        print(df)
 
         # Putting the index in the slicing in order to writting them down easily in the duplicates_check.xlsx
         df = df.reset_index(drop=True)
