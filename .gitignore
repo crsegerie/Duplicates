@@ -11,3 +11,5 @@ old/results_total_filter_employes_nace_nord_v8.xlsx
 results/duplicates_all_qui_vient_des_check_fait_comme_il_faut.xlsx
 results/without_duplicates.xlsx
 __pycache__/duplicates.cpython-38.pyc
+.vscode/.ropeproject/config.py
+.vscode/launch.json
